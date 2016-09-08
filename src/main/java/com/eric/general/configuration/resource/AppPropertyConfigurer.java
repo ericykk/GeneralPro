@@ -23,7 +23,7 @@ public class AppPropertyConfigurer extends PropertyPlaceholderConfigurer {
 
         File file = new File(ConfigurationMap.getClassRootPath() + superProps.getProperty("env") + "/log4j2.xml");
 
-        LoggerContext context =(LoggerContext) LogManager.getContext(false);
+        LoggerContext context =(LoggerContext) LogManager.getContext();
         context.setConfigLocation(file.toURI());
 
         //重新初始化Log4j2的配置上下文
