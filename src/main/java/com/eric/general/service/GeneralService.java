@@ -17,6 +17,10 @@ public class GeneralService {
     @Autowired
     private GeneralDao generalDao;
 
+    /**
+     * 获取数据库当前时间
+     * @return
+     */
     public Date getGeneralDate(){
         return generalDao.getGeneralDate();
     }

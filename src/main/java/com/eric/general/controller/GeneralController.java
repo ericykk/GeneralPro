@@ -2,6 +2,8 @@ package com.eric.general.controller;
 
 import com.eric.general.common.JsonResult;
 import com.eric.general.service.GeneralService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,10 @@ public class GeneralController {
     @Autowired
     private GeneralService generalService;
 
-
+    /**
+     * 获取当前时间
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/getDate",method = RequestMethod.GET)
     public JsonResult getCurrentDate(){
