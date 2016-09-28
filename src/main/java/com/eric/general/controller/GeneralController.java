@@ -1,9 +1,8 @@
 package com.eric.general.controller;
 
-import com.eric.general.common.JsonResult;
+import com.eric.general.common.controller.BaseController;
+import com.eric.general.common.model.JsonResult;
 import com.eric.general.service.GeneralService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ import java.util.Date;
  **/
 @Controller
 @RequestMapping(value = "/general")
-public class GeneralController {
+public class GeneralController extends BaseController{
 
     @Autowired
     private GeneralService generalService;
@@ -35,6 +34,6 @@ public class GeneralController {
     public JsonResult getCurrentDate(){
         Date currentDate = generalService.getGeneralDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return new JsonResult(JsonResult.STATUS.OK,sdf.format(currentDate));
+        return ok().put("currentDate", sdf.format(currentDate));
     }
 }

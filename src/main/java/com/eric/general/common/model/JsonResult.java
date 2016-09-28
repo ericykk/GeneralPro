@@ -1,4 +1,4 @@
-package com.eric.general.common;
+package com.eric.general.common.model;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class JsonResult extends HashMap<String, Object> {
 
-    private JsonResult() {
+    public JsonResult() {
     }
 
     public JsonResult(JsonResult.STATUS status) {
