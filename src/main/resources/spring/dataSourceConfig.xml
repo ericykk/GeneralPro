@@ -44,7 +44,7 @@
     <!-- 配置基于注解的事物aop -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!-- 配置sqlSessionFactory -->
+    <!-- 配置sqlSessionFactory-->
     <bean id="utilSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
         <property name="dataSource" ref="dataSource_util" />
@@ -64,7 +64,7 @@
         <property name="sqlSessionFactoryBeanName" value="utilSqlSessionFactory" />
     </bean>
 
-    <!--配置jdbc模板 采用mybatis接口模式映射 不用配置-->
+    <!--配置jdbc模板 如果采用mybatis接口模式映射 去掉该配置-->
     <bean id="sqlSession" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource">
             <ref bean="dataSource_util"/>

@@ -22,6 +22,7 @@
         <setting name="defaultExecutorType" value="SIMPLE" />
         <!-- 数据库超过25000秒仍未响应则超时 -->
         <setting name="defaultStatementTimeout" value="25000" />
-        <setting name="jdbcTypeForNull" value="OTHER"/>
+        <!-- 配置使用log4j2记录日志-->
+        <setting name="logImpl" value="LOG4J2"/>
     </settings>
 </configuration>
