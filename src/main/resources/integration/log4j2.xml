@@ -30,7 +30,7 @@
 
     <loggers>
         <!--配置mybatis对应的dao包路径 便于打印sql-->
-        <logger name="com.eric.general.dao" level="debug" additivity="false">
+        <logger name="com.eric.general.dao" level="info" additivity="false">
             <appender-ref ref="STDOUT"/>
         </logger>
         <!--默认的root的logger-->
