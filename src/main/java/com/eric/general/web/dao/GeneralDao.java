@@ -1,8 +1,7 @@
-package com.eric.general.dao;
+package com.eric.general.web.dao;
 
 import org.springframework.stereotype.Repository;
 
-import java.lang.annotation.Repeatable;
 import java.util.Date;
 
 /**

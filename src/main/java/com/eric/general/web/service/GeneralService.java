@@ -1,6 +1,6 @@
-package com.eric.general.service;
+package com.eric.general.web.service;
 
-import com.eric.general.dao.GeneralDao;
+import com.eric.general.web.dao.GeneralDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,7 @@ import java.util.Date;
  **/
 @Service
 public class GeneralService {
+
     @Autowired
     private GeneralDao generalDao;
 

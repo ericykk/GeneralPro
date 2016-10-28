@@ -1,6 +1,6 @@
-package com.eric.general.configuration.resource;
+package com.eric.general.core.framework;
 
-import com.eric.general.common.util.IpUtils;
+import com.eric.general.base.util.IpUtils;
 import org.apache.commons.collections.MapUtils;
 import org.junit.Assert;
 import org.slf4j.Logger;

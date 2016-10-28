@@ -12,7 +12,7 @@
     <context:component-scan base-package="com.eric.general"/>
 
     <!-- 初始化配置信息 对PropertyPlaceholderConfigurer进行自定义扩展-->
-    <bean id="propertyConfigurer" class="com.eric.general.configuration.resource.AppPropertyConfigurer">
+    <bean id="propertyConfigurer" class="com.eric.general.core.framework.AppPropertyConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:config/jdbc.properties</value>
@@ -26,6 +26,7 @@
     <!--开启mvc-->
     <mvc:annotation-driven/>
 
+
     <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/>
@@ -34,11 +35,11 @@
     </bean>
 
 
-    <!--添加SpringMvc防重复提交拦截器-->
+    <!--SpringMvc防重复提交拦截器-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
         <property name="interceptors">
             <list>
-                <bean class="com.eric.general.configuration.interceptor.AvoidDuplicateSubmissionInterceptor"/>
+                <bean class="com.eric.general.core.interceptor.AvoidDuplicateSubmissionInterceptor"/>
             </list>
         </property>
     </bean>

@@ -1,5 +1,5 @@
-package com.eric.general.configuration.resource;
-import com.eric.general.common.util.IpUtils;
+package com.eric.general.core.framework;
+import com.eric.general.base.util.IpUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -20,7 +20,7 @@ public class AppPropertyConfigurer extends PropertyPlaceholderConfigurer {
     protected Properties mergeProperties() throws IOException {
     	Properties superProps = super.mergeProperties();
         superProps.put("env", ConfigurationMap.getEvnDir());
-
+        //根据运行环境加载日志文件
         File file = new File(ConfigurationMap.getClassRootPath() + superProps.getProperty("env") + "/log4j2.xml");
         LoggerContext context =(LoggerContext)LogManager.getContext(false);
         context.setConfigLocation(file.toURI());

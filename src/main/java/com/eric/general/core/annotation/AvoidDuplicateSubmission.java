@@ -1,4 +1,4 @@
-package com.eric.general.configuration.annotation;
+package com.eric.general.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

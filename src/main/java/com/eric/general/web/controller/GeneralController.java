@@ -1,8 +1,8 @@
-package com.eric.general.controller;
+package com.eric.general.web.controller;
 
-import com.eric.general.common.controller.BaseController;
-import com.eric.general.common.model.JsonResult;
-import com.eric.general.service.GeneralService;
+import com.eric.general.base.controller.BaseController;
+import com.eric.general.base.model.JsonResult;
+import com.eric.general.web.service.GeneralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ import java.util.Date;
  **/
 @Controller
 @RequestMapping(value = "/general")
-public class GeneralController extends BaseController{
+public class GeneralController extends BaseController {
 
     @Autowired
     private GeneralService generalService;

@@ -1,6 +1,6 @@
-package com.eric.general.common.controller;
-import com.eric.general.common.model.BaseEntity;
-import com.eric.general.common.model.JsonResult;
+package com.eric.general.base.controller;
+import com.eric.general.base.model.BaseEntity;
+import com.eric.general.base.model.JsonResult;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
  * version 1.0.0
  */
 public class BaseController {
-
-    private static final Logger logger = LogManager.getLogger(BaseController.class);
 
     protected static final JsonResult OK;
     protected static final JsonResult FAIL;

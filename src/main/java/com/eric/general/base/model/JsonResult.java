@@ -1,4 +1,4 @@
-package com.eric.general.common.model;
+package com.eric.general.base.model;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;

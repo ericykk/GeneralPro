@@ -1,4 +1,4 @@
-package com.eric.general.common.util;
+package com.eric.general.base.util;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

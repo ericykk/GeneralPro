@@ -1,7 +1,7 @@
-package com.eric.general.configuration.interceptor;
+package com.eric.general.core.interceptor;
 
-import com.eric.general.common.model.JsonResult;
-import com.eric.general.configuration.annotation.AvoidDuplicateSubmission;
+import com.eric.general.base.model.JsonResult;
+import com.eric.general.core.annotation.AvoidDuplicateSubmission;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
