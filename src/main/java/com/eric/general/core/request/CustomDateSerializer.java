@@ -9,12 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * description:将java对象中date类型字段转换为指定格式的json字符串
- * author:Eric
- * Date:16/10/17
- * Time:18:38
- * version 1.0.0
- */
+* Description: 将java对象中date类型字段转换为指定格式的json字符串
+* author: Eric
+* Date: 18/4/25
+*/
 public class CustomDateSerializer extends JsonSerializer<Date> {
 
     @Override

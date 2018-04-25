@@ -1,11 +1,11 @@
 package com.eric.general.core.interceptor;
 
-import com.eric.general.base.model.JsonResult;
+import com.alibaba.fastjson.JSON;
 import com.eric.general.core.annotation.AvoidDuplicateSubmission;
+import com.eric.general.model.JsonResult;
 import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.nutz.json.Json;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -17,7 +17,9 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 
 /**
- * 请求重复提交拦截器
+ * Description:防重复提交拦截器 单实例
+ * author: Eric
+ * Date: 18/4/25
  */
 public class AvoidDuplicateSubmissionInterceptor extends HandlerInterceptorAdapter {
 
@@ -28,26 +30,26 @@ public class AvoidDuplicateSubmissionInterceptor extends HandlerInterceptorAdapt
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //可扩展 过滤指定的请求 判断用户是否登录等
         if (handler instanceof HandlerMethod) {
-                HandlerMethod handlerMethod = (HandlerMethod) handler;
-                // 取得当前方法名
-                Method method = handlerMethod.getMethod();
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            // 取得当前方法名
+            Method method = handlerMethod.getMethod();
 
-                // 取得方法中AvoidDuplicateSubmission的注释
-                AvoidDuplicateSubmission annotation = method.getAnnotation(AvoidDuplicateSubmission.class);
-                if (annotation != null) {
-                    String tokenName = getTokenName(request, handlerMethod);
-                    LOGGER.info("=====" + tokenName);
-                    //如果存在表示前一个请求还没结束
-                    Object tokenObject = request.getSession(false).getAttribute(tokenName);
-                    if (tokenObject != null && StringUtils.isNotBlank(tokenObject.toString())) {
-                        // 请求提交失败
-                        LOGGER.error("please don't repeat submit,["+", url:" + request.getServletPath() + ",tokenName:" + tokenName + "]");
-                        writeResponse(response);
-                        return false;
-                    }
-                    // 添加请求对应的token
-                    request.getSession(false).setAttribute(tokenName, UUID.randomUUID().toString());
+            // 取得方法中AvoidDuplicateSubmission的注释
+            AvoidDuplicateSubmission annotation = method.getAnnotation(AvoidDuplicateSubmission.class);
+            if (annotation != null) {
+                String tokenName = getTokenName(request, handlerMethod);
+                LOGGER.info("=====" + tokenName);
+                //如果存在表示前一个请求还没结束
+                Object tokenObject = request.getSession(false).getAttribute(tokenName);
+                if (tokenObject != null && StringUtils.isNotBlank(tokenObject.toString())) {
+                    // 请求提交失败
+                    LOGGER.error("please don't repeat submit,[" + ", url:" + request.getServletPath() + ",tokenName:" + tokenName + "]");
+                    writeResponse(response);
+                    return false;
                 }
+                // 添加请求对应的token
+                request.getSession(false).setAttribute(tokenName, UUID.randomUUID().toString());
+            }
         }
         return true;
     }
@@ -70,6 +72,7 @@ public class AvoidDuplicateSubmissionInterceptor extends HandlerInterceptorAdapt
 
     /**
      * 获取请求方法指定的tokenName
+     *
      * @param request
      * @param handlerMethod
      * @return
@@ -77,7 +80,7 @@ public class AvoidDuplicateSubmissionInterceptor extends HandlerInterceptorAdapt
     private String getTokenName(HttpServletRequest request, HandlerMethod handlerMethod) {
         String className = handlerMethod.getBeanType().getName();
         String classMethod = handlerMethod.getMethod().getName();
-        String params = Json.toJson(request.getParameterMap());
+        String params = JSON.toJSONString(request.getParameterMap());
         String requestUrl = request.getRequestURI();
         return className + "." + classMethod + "." + requestUrl + "." + params;
     }

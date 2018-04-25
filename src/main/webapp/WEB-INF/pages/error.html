@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>访问异常</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+</head>
+
+<body class=" ">
+<div>
+    <div class="container">
+        <section class="tc">
+            <div class="error-pic"></div>
+            <h2 class="txt-mid3">
+                喵呜~网站访问的人太多啦~<br>
+                先休息一会儿再来吧~
+            </h2>
+            <div class="error-cont">
+                <p class="mgtb-10">
+                    错误类型：500
+                </p>
+                <a href="javascript:window.location.reload();">刷新一下</a>
+                <input type="hidden" th:text="${errorMsg}">
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>
