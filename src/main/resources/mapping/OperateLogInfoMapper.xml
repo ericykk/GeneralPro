@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eric.general.dao.OperateLogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.eric.general.model.OperateLogInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+    <result column="operate_uid" property="operateUid" jdbcType="BIGINT" />
+    <result column="from_ip" property="fromIp" jdbcType="VARCHAR" />
+    <result column="request_method" property="requestMethod" jdbcType="VARCHAR" />
+    <result column="request_uri" property="requestUri" jdbcType="VARCHAR" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+    <result column="operate_desc" property="operateDesc" jdbcType="VARCHAR" />
+    <result column="visit_method" property="visitMethod" jdbcType="VARCHAR" />
+    <result column="cost_time" property="costTime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="visit_method_error_info" property="visitMethodErrorInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, operate_name, operate_uid, from_ip, request_method, request_uri, log_type, operate_desc, 
+    visit_method, cost_time, create_time, update_time, status, visit_method_error_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_operate_log_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_operate_log_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.eric.general.model.OperateLogInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into tb_operate_log_info (id, operate_name, operate_uid, 
+      from_ip, request_method, request_uri, 
+      log_type, operate_desc, visit_method, 
+      cost_time, create_time, update_time, 
+      status, visit_method_error_info)
+    values (#{id,jdbcType=BIGINT}, #{operateName,jdbcType=VARCHAR}, #{operateUid,jdbcType=BIGINT}, 
+      #{fromIp,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR}, #{requestUri,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR}, #{operateDesc,jdbcType=VARCHAR}, #{visitMethod,jdbcType=VARCHAR}, 
+      #{costTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{status,jdbcType=TINYINT}, #{visitMethodErrorInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eric.general.model.OperateLogInfo" >
+    insert into tb_operate_log_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="operateName != null" >
+        operate_name,
+      </if>
+      <if test="operateUid != null" >
+        operate_uid,
+      </if>
+      <if test="fromIp != null" >
+        from_ip,
+      </if>
+      <if test="requestMethod != null" >
+        request_method,
+      </if>
+      <if test="requestUri != null" >
+        request_uri,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="operateDesc != null" >
+        operate_desc,
+      </if>
+      <if test="visitMethod != null" >
+        visit_method,
+      </if>
+      <if test="costTime != null" >
+        cost_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="visitMethodErrorInfo != null" >
+        visit_method_error_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="operateName != null" >
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUid != null" >
+        #{operateUid,jdbcType=BIGINT},
+      </if>
+      <if test="fromIp != null" >
+        #{fromIp,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null" >
+        #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUri != null" >
+        #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDesc != null" >
+        #{operateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="visitMethod != null" >
+        #{visitMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="costTime != null" >
+        #{costTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="visitMethodErrorInfo != null" >
+        #{visitMethodErrorInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eric.general.model.OperateLogInfo" >
+    update tb_operate_log_info
+    <set >
+      <if test="operateName != null" >
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUid != null" >
+        operate_uid = #{operateUid,jdbcType=BIGINT},
+      </if>
+      <if test="fromIp != null" >
+        from_ip = #{fromIp,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null" >
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUri != null" >
+        request_uri = #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDesc != null" >
+        operate_desc = #{operateDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="visitMethod != null" >
+        visit_method = #{visitMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="costTime != null" >
+        cost_time = #{costTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="visitMethodErrorInfo != null" >
+        visit_method_error_info = #{visitMethodErrorInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eric.general.model.OperateLogInfo" >
+    update tb_operate_log_info
+    set operate_name = #{operateName,jdbcType=VARCHAR},
+      operate_uid = #{operateUid,jdbcType=BIGINT},
+      from_ip = #{fromIp,jdbcType=VARCHAR},
+      request_method = #{requestMethod,jdbcType=VARCHAR},
+      request_uri = #{requestUri,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      operate_desc = #{operateDesc,jdbcType=VARCHAR},
+      visit_method = #{visitMethod,jdbcType=VARCHAR},
+      cost_time = #{costTime,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      visit_method_error_info = #{visitMethodErrorInfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
