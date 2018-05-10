@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
- * 描述:
+ * 描述: 采用aspect注解实现切面日志管理
  * <p>
  * 系统日志切面，针对使用了SystemLog注释的方法进行拦截 将日志数据写入数据库
  *
@@ -43,12 +43,9 @@ public class SystemLogAspect {
     private static final ThreadLocal<OperateLogInfo> LOG_THREAD_LOCAL = new NamedThreadLocal<OperateLogInfo>("ThreadLocal log");
 
 
-    @Resource
     private HttpServletRequest request;
 
-    /**
-     * spring框架自带的线程池
-     */
+
     @Resource
     private ThreadPoolTaskExecutor taskExecutor;
 

@@ -12,5 +12,5 @@ import java.util.List;
  * @create 2018-04-25 下午3:15
  */
 public interface IVoteService {
-    List<VoteUserPO> getAllVoteUser();
+    List<VoteUserPO> getAllVoteUser() throws Exception;
 }

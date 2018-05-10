@@ -3,6 +3,8 @@ package com.eric.general.controller;
 import com.eric.general.core.annotation.SystemLog;
 import com.eric.general.model.JsonResult;
 import com.eric.general.service.IVoteService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,12 +23,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/vote")
 @Controller
 public class VoteController extends BaseController {
+    private Logger logger = LoggerFactory.getLogger(VoteController.class);
     @Resource
     private IVoteService voteService;
 
     @RequestMapping(value = "/getAllVoteUser", method = RequestMethod.GET)
     public String getAllVoteUser(HttpSession session) {
-        session.setAttribute("user", voteService.getAllVoteUser().get(0));
+        try{
+            session.setAttribute("user", voteService.getAllVoteUser().get(0));
+        }catch(Exception e){
+            logger.error(e.getMessage());
+        }
         return "redirect:/vote/getVoteUser";
     }
 

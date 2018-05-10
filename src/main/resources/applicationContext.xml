@@ -50,6 +50,21 @@
         </property>
     </bean>
 
+
+    <bean id="voteService" class="com.eric.general.service.impl.VoteServiceImpl"/>
+    <bean id="xmlLogAdvice" class="com.eric.general.core.aop.XmlLogAdvice"/>
+    <aop:config>
+        <aop:aspect id="aspect" ref="xmlLogAdvice">
+            <aop:pointcut id="pointVoteUser" expression="execution(* com.eric.general.service.impl.*.getAll*(..))"/>
+            <aop:before method="doBefore" pointcut-ref="pointVoteUser"/>
+            <aop:around method="doAround" pointcut-ref="pointVoteUser"/>
+            <aop:after method="doAfter" pointcut-ref="pointVoteUser"/>
+            <aop:after-returning method="doReturn" pointcut-ref="pointVoteUser"/>
+            <aop:after-throwing method="doThrowing" throwing="ex" pointcut-ref="pointVoteUser"/>
+        </aop:aspect>
+    </aop:config>
+
+
     <!--引入外部文件-->
     <import resource="dataSourceConfig.xml"/>
 
