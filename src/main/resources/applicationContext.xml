@@ -8,7 +8,6 @@
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-lazy-init="false">
 
-    <aop:aspectj-autoproxy/>
 
     <!--开启自动扫描 自动注入相应BeanPostProcessor-->
     <context:component-scan base-package="com.eric.general"/>
@@ -22,12 +21,17 @@
         </property>
     </bean>
 
+    <!--基于@Aspectj注解实现 aop start-->
+    <aop:aspectj-autoproxy/>
+
+
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <property name="corePoolSize" value="5"/>
         <property name="maxPoolSize" value="10"/>
         <property name="WaitForTasksToCompleteOnShutdown" value="true"/>
     </bean>
 
+    <!--基于@Aspectj注解实现 aop end-->
 
     <!--开启mvc-->
     <mvc:annotation-driven/>
@@ -50,22 +54,53 @@
         </property>
     </bean>
 
+    <!--基于经典代理模式实现aop start-->
+    <!-- 定义被代理者 -->
+    <!--<bean id="voteService" class="com.eric.general.service.impl.VoteServiceImpl"/>-->
 
-    <bean id="voteService" class="com.eric.general.service.impl.VoteServiceImpl"/>
-    <bean id="xmlLogAdvice" class="com.eric.general.core.aop.XmlLogAdvice"/>
-    <aop:config>
-        <aop:aspect id="aspect" ref="xmlLogAdvice">
-            <aop:pointcut id="pointVoteUser" expression="execution(* com.eric.general.service.impl.*.getAll*(..))"/>
-            <aop:before method="doBefore" pointcut-ref="pointVoteUser"/>
-            <aop:around method="doAround" pointcut-ref="pointVoteUser"/>
-            <aop:after method="doAfter" pointcut-ref="pointVoteUser"/>
-            <aop:after-returning method="doReturn" pointcut-ref="pointVoteUser"/>
-            <aop:after-throwing method="doThrowing" throwing="ex" pointcut-ref="pointVoteUser"/>
-        </aop:aspect>
-    </aop:config>
+
+    <!--&lt;!&ndash; 定义通知内容，也就是切入点执行前后需要做的事情 &ndash;&gt;-->
+    <!--<bean id="systemLogHelper" class="com.eric.general.core.aop.SystemLogHelper"/>-->
+
+    <!--&lt;!&ndash; 定义切入点位置 &ndash;&gt;-->
+    <!--<bean id="systemLogPointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut">-->
+        <!--<property name="pattern" value=".*getAllVoteUser"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 使切入点与通知相关联，完成切面配置 &ndash;&gt;-->
+    <!--<bean id="systemLogHelperAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">-->
+        <!--<property name="advice" ref="systemLogHelper"/>-->
+        <!--<property name="pointcut" ref="systemLogPointcut"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 设置代理 &ndash;&gt;-->
+    <!--<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+        <!--&lt;!&ndash; 代理的对象，有睡觉能力 &ndash;&gt;-->
+        <!--<property name="target" ref="voteService"/>-->
+        <!--&lt;!&ndash; 使用切面 &ndash;&gt;-->
+        <!--<property name="interceptorNames" value="systemLogHelperAdvisor"/>-->
+        <!--&lt;!&ndash; 代理接口，睡觉接口 &ndash;&gt;-->
+        <!--<property name="proxyInterfaces" value="com.eric.general.service.IVoteService"/>-->
+    <!--</bean>-->
+
+    <!--基于经典代理模式实现aop end-->
+
+
+    <!--基于xml配置方式实现aop start-->
+    <!--<bean id="xmlLogAdvice" class="com.eric.general.core.aop.XmlLogAdvice"/>-->
+    <!--<aop:config>-->
+        <!--<aop:aspect id="aspect" ref="xmlLogAdvice">-->
+            <!--<aop:pointcut id="pointVoteUser" expression="execution(* com.eric.general.service.impl.*.getAll*(..))"/>-->
+            <!--<aop:before method="doBefore" pointcut-ref="pointVoteUser"/>-->
+            <!--<aop:around method="doAround" pointcut-ref="pointVoteUser"/>-->
+            <!--<aop:after method="doAfter" pointcut-ref="pointVoteUser"/>-->
+            <!--<aop:after-returning method="doReturn" pointcut-ref="pointVoteUser"/>-->
+            <!--<aop:after-throwing method="doThrowing" throwing="ex" pointcut-ref="pointVoteUser"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+    <!--基于xml配置方式实现aop end-->
 
 
     <!--引入外部文件-->
     <import resource="dataSourceConfig.xml"/>
-
 </beans>
