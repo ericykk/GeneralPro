@@ -4,11 +4,10 @@ import com.eric.general.core.annotation.SystemLog;
 import com.eric.general.model.OperateLogInfo;
 import com.eric.general.model.VoteUserPO;
 import com.eric.general.service.IOperateLogInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -29,18 +28,17 @@ import java.util.Date;
  * @author eric
  * @create 2018-05-07 下午4:07
  */
+@Slf4j
 @Component
 @Aspect
 public class SystemLogAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(SystemLogAspect.class);
-
     /**
      * 记录每个用户刚开始访问方法的时间
      */
-    private static final ThreadLocal<Date> BEGIN_TIME_THREAD_LOCAL = new NamedThreadLocal<Date>("ThreadLocal beginTime");
+    private static final ThreadLocal<Date> BEGIN_TIME_THREAD_LOCAL = new NamedThreadLocal<>("ThreadLocal beginTime");
 
-    private static final ThreadLocal<OperateLogInfo> LOG_THREAD_LOCAL = new NamedThreadLocal<OperateLogInfo>("ThreadLocal log");
+    private static final ThreadLocal<OperateLogInfo> LOG_THREAD_LOCAL = new NamedThreadLocal<>("ThreadLocal log");
 
 
     @Resource
@@ -85,7 +83,7 @@ public class SystemLogAspect {
 
         BEGIN_TIME_THREAD_LOCAL.set(beginTime);
 
-        logger.debug("开始计时: {}，URI: {}", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(beginTime), request.getRequestURI());
+        log.debug("开始计时: {}，URI: {}", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(beginTime), request.getRequestURI());
 
     }
 

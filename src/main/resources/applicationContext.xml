@@ -52,5 +52,7 @@
 
     <!--引入外部文件-->
     <import resource="dataSourceConfig.xml"/>
+    <import resource="applicationContext-redis.xml"/>
+    <import resource="applicationContext-rabbit.xml"/>
 
 </beans>
