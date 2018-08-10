@@ -4,6 +4,7 @@ package com.eric.general.service.impl;
 import com.eric.general.dao.VoteUserPoMapper;
 import com.eric.general.model.VoteUserPO;
 import com.eric.general.service.IVoteService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author eric
  * @create 2018-04-25 下午3:15
  */
+@Slf4j
 @Service
 public class VoteServiceImpl implements IVoteService {
 
